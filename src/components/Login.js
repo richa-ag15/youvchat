@@ -4,15 +4,14 @@ import React from 'react';
 import "firebase/app";
 import { auth } from '../firebase';
 import firebase from 'firebase/app';
-// import Verification from './Verification';
+import Verification from './Verification';
 // import { Form, Button } from "react-bootstrap"
 
 
-const Login = () => {
 
-    // const show = () => {
-    //   document.getElementById('showDiv').style.display = 'block'
-    // }
+const Login = () => {
+    const [modalShow, setModalShow] = React.useState(false);
+    
     return (
         <>
 
@@ -26,20 +25,23 @@ const Login = () => {
                         <FcGoogle /> Sign in with google
                     </div>
                     <br /><br />
-                    <div className='login-button facebook'>
+                    <div className='login-button facebook' onClick={() => setModalShow(true)}>
                         < FcPhone /> Sign In with phone
                     </div>
-                    {/* <div className='login-button facebook'
-                      onClick={() => auth.signInWithRedirect(new firebase.auth.PhoneAuthProvider())}>
-               < FcPhone/> Sign In with facebook
-           </div> */}
+
+                   
                 </div>
 
+                <Verification
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
             </div>
-            
+             
 
         </>
     );
 }
+
 
 export default Login;
